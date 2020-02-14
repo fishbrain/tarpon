@@ -34,7 +34,7 @@ module Tarpon
         def grant_promotional(duration:, start_time_ms: nil)
           body = {
             duration: duration,
-            start_time_ms: start_time_ms
+            start_time_ms: start_time_ms,
           }
 
           perform(method: :post, path: "#{path}/promotional", key: :secret, body: body)

@@ -1,3 +1,4 @@
+require 'tarpon/response'
 require 'http'
 
 module Tarpon
@@ -15,7 +16,7 @@ module Tarpon
           .auth("Bearer #{translate_key(key)}")
           .headers(headers.merge(DEFAULT_HEADERS))
           .send(method, "#{Client.base_uri}#{path}", json: body&.compact)
-          .to_s
+          .then { |response| Tarpon::Response.new(JSON.parse(response.body)) }
       end
 
       def translate_key(key)
