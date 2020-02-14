@@ -9,13 +9,11 @@ module Tarpon
       end
 
       def active?
-        expires_date >= Time.now.utc
+        expires_date > Time.now.utc
       end
 
       def expires_date
-        return nil if @raw['expires_date'].nil? || @raw['expires_date'].empty?
-
-        Time.iso8601(@raw['expires_date'])
+        Time.iso8601(@raw[:expires_date])
       end
     end
   end
