@@ -6,7 +6,7 @@ module Tarpon
 
     def initialize(attributes = {})
       @raw        = attributes
-      @subscriber = Entity::Subscriber.new(@raw['subscriber'])
+      @subscriber = Entity::Subscriber.new(@raw[:subscriber])
     end
   end
 end

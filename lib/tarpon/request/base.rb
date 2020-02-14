@@ -16,7 +16,7 @@ module Tarpon
           .auth("Bearer #{translate_key(key)}")
           .headers(headers.merge(DEFAULT_HEADERS))
           .send(method, "#{Client.base_uri}#{path}", json: body&.compact)
-          .then { |response| Tarpon::Response.new(JSON.parse(response.body)) }
+          .then { |response| Tarpon::Response.new(JSON.parse(response.body, symbolize_names: true)) }
       end
 
       def translate_key(key)
