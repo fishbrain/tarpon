@@ -1,5 +1,3 @@
-require 'tarpon/request/base'
-
 module Tarpon
   module Request
     class Receipt < Base

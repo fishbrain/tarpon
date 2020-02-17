@@ -1,5 +1,3 @@
-require 'tarpon/entity/entitlement'
-
 module Tarpon
   module Entity
     class EntitlementList

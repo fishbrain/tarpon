@@ -1,7 +1,3 @@
-require 'tarpon/configuration'
-require 'tarpon/request/subscriber'
-require 'tarpon/request/receipt'
-
 module Tarpon
   class Client
     extend Configuration

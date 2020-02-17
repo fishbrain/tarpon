@@ -1,4 +1,3 @@
-require 'tarpon/response'
 require 'http'
 
 module Tarpon

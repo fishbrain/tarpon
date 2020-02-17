@@ -1,5 +1,3 @@
-require 'tarpon/entity/entitlement_list'
-
 module Tarpon
   module Entity
     class Subscriber
