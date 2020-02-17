@@ -1,6 +1,8 @@
 require 'bundler/setup'
 require 'tarpon'
 require 'factory_bot'
+require 'webmock/rspec'
+Dir[File.dirname(__FILE__) + '/support/**/*.rb'].each {|file| require file }
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
@@ -17,5 +19,14 @@ RSpec.configure do |config|
 
   config.before(:suite) do
     FactoryBot.find_definitions
+  end
+
+  WebMock.disable_net_connect!(allow_localhost: true)
+
+  config.before(:suite) do
+    Tarpon::Client.configure do |c|
+      c.public_api_key = 'public-key'
+      c.secret_api_key = 'secret-key'
+    end
   end
 end
