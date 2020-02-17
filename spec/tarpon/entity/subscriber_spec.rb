@@ -6,7 +6,7 @@ RSpec.describe Tarpon::Entity::Subscriber do
 
   let(:attributes) {
     {
-      'entitlements' => {},
+      entitlements: {},
     }
   }
 
@@ -21,7 +21,7 @@ RSpec.describe Tarpon::Entity::Subscriber do
 
     before do
       expect(Tarpon::Entity::EntitlementList).to receive(:new)
-        .with(attributes['entitlements'])
+        .with(attributes[:entitlements])
         .and_return(entitlements_list)
     end
 
