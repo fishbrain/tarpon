@@ -48,6 +48,21 @@ RSpec.describe Tarpon::Client do
         end
       end
     end
+
+    describe '.subscriptions' do
+      let(:base_call) { described_class.subscriber(app_user_id).subscriptions(product_id) }
+      let(:product_id) { 'monthly' }
+
+      describe '.defer' do
+        it_behaves_like 'an http call to RevenueCat responding with subscriber object', method: :post, api_key: :secret do
+          let(:body) { { expiry_time_ms: 12345 } }
+          let(:client_call) { [:defer, body] }
+          let(:uri) {
+            "#{described_class.base_uri}/subscribers/#{app_user_id}/subscriptions/#{product_id}/defer"
+          }
+        end
+      end
+    end
   end
 
   describe '.receipt' do
