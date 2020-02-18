@@ -27,6 +27,7 @@ RSpec.configure do |config|
     Tarpon::Client.configure do |c|
       c.public_api_key = 'public-key'
       c.secret_api_key = 'secret-key'
+      c.timeout        = 1
     end
   end
 end
