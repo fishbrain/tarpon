@@ -1,8 +1,6 @@
 # Tarpon
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/tarpon`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+A ruby interface to RevenueCat REST API.
 
 ## Installation
 
@@ -22,17 +20,150 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+### Configuration
 
-## Development
+```ruby
+Tarpon::Client.configure do |c|
+  c.public_api_key = 'your-public-key'
+  c.secret_api_key = 'your-secret-key'
+  c.timeout        = 1 # a global timeout in seconds for http requests to RevenueCat server, default is 5 seconds
+end
+```
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+### Performing requests
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+#### Get or create a subscriber
+
+```ruby
+Tarpon::Client
+  .subscriber('app_user_id')
+  .get_or_create
+```
+
+#### Delete a subscriber
+
+```ruby
+Tarpon::Client
+  .subscriber('app_user_id')
+  .delete
+```
+
+#### Grant a promotional entitlement
+
+```ruby
+Tarpon::Client
+  .subscriber('app_user_id')
+  .entitlements('entitlement_id')
+  .grant_promotional(duration: 'daily', start_time_ms: 1582023714931)
+```
+
+Check the [endpoint reference](https://docs.revenuecat.com/reference#grant-a-promotional-entitlement) for valid `duration` values, Tarpon does not perform any input validation.
+
+#### Revoke a promotional entitlement
+
+```ruby
+Tarpon::Client
+  .subscriber('app_user_id')
+  .entitlements('entitlement_id')
+  .revoke_promotional
+```
+
+#### Create a purchase
+
+```ruby
+platform = 'ios' # possible values: android|ios|stripe
+payload = {
+  app_user_id: 'app_user_id',
+  fetch_token: 'fetch_token',
+}
+Tarpon::Client
+  .receipt
+  .create(platform: platform, payload)
+```
+
+Check the [endpoint reference](https://docs.revenuecat.com/reference#receipts) for a valid purchase payload.
+
+#### Defer billing (android)
+
+```ruby
+Tarpon::Client
+  .subscriber('app_user_id')
+  .subscriptions('product_id')
+  .defer(expiry_time_ms: 1582023715118)
+```
+
+### Handling responses
+
+Tarpon will raise custom errors in a few occasions:
+
+- `Tarpon::InvalidCredentialsError` will be raised when RevenueCat server responds with unauthorized status code, e.g. invalid API key.
+
+- `Tarpon::ServerError` will be raised when RevenueCat server responds with internal error status code (5xx).
+
+- `Tarpon::TimeoutError` will be raised when RevenueCat server takes too long to respond, based on `Tarpon::Client.timeout`.
+
+
+#### The Response object
+
+```ruby
+response = Tarpon::Client
+             .subscriber('app_user_id')
+             .get_or_create
+```
+
+The plain response body from RevenueCat is stored in the `raw` attribute:
+
+```ruby
+response.raw
+# {
+#   request_date_ms: 1582029851163,
+#   subscriber: {
+#     original_app_user_id: 'app_user_id',
+#     ...
+#   }
+# }
+```
+
+Use the `success?` method to know whether the request was successful:
+
+```ruby
+response.success? # boolean
+```
+
+The subscriber entity is stored in the `subscriber` attribute when the subscriber object is returned by RevenueCat:
+
+```ruby
+response.subscriber # <Tarpon::Entity::Subscriber>
+```
+
+#### The subscriber entity
+
+The subscriber entity comes with a few goodies that might save you some time.
+
+Get the user entitlements:
+
+```ruby
+response.subscriber.entitlements
+```
+
+Get only active user entitlements:
+
+```ruby
+response.subscriber.entitlements.active
+```
+
+#### The entitlement entity
+
+```ruby
+response.subscriber.entitlements.each do |entitlement|
+  entitlement.expires_date # Ruby time parsed from iso8601
+  entitlement.active? # true if expires_date > Time.now.utc
+end
+```
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/tarpon.
+Bug reports and pull requests are welcome on GitHub at https://github.com/fishbrain/tarpon.
 
 ## License
 
