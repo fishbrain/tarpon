@@ -19,6 +19,26 @@ RSpec.shared_examples 'an http call to RevenueCat' do |options|
     )
   end
 
+  context 'when server responds with 5xx' do
+    before { stubbed_request.to_return(status: 500) }
+
+    it 'raises Tarpon::ServerError' do
+      expect {
+        base_call.send(*client_call)
+      }.to raise_error(Tarpon::ServerError)
+    end
+  end
+
+  context 'when request has invalid credentials' do
+    before { stubbed_request.to_return(status: 401) }
+
+    it 'raises Tarpon::InvalidCredentialsError' do
+      expect {
+        base_call.send(*client_call)
+      }.to raise_error(Tarpon::InvalidCredentialsError)
+    end
+  end
+
   context 'when request times out' do
     before { stubbed_request.to_timeout }
 
@@ -46,6 +66,7 @@ RSpec.shared_examples 'an http call to RevenueCat' do |options|
       if options[:response] == :custom && defined?(response_expectation)
         response_expectation.call(r)
       else
+        expect(r).to be_success
         expect(r.raw).to eq(subscriber: subscriber)
         expect(r.subscriber).to eq(double_subscriber)
       end
