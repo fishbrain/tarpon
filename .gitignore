@@ -9,3 +9,5 @@
 
 # rspec failure tracking
 .rspec_status
+
+.rake_t_cache
