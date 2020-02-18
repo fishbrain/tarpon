@@ -1,3 +1,5 @@
+require 'tarpon/configuration'
+
 module Tarpon
   class Client
     extend Configuration
