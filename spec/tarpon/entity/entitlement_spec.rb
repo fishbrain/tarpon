@@ -1,5 +1,6 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
-require 'tarpon/entity/entitlement'
 
 RSpec.describe Tarpon::Entity::Entitlement do
   subject { described_class.new(id, attributes) }

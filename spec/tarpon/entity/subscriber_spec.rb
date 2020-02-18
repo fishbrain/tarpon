@@ -1,14 +1,15 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
-require 'tarpon/entity/subscriber'
 
 RSpec.describe Tarpon::Entity::Subscriber do
   subject { described_class.new(attributes) }
 
-  let(:attributes) {
+  let(:attributes) do
     {
-      entitlements: {},
+      entitlements: {}
     }
-  }
+  end
 
   describe '#raw' do
     it 'returns the raw attributes without modification' do

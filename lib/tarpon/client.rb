@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'tarpon/configuration'
 
 module Tarpon

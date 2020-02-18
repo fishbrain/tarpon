@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :entitlement, class: Hash do
     expires_date { Time.now.utc.iso8601 }

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'tarpon/client'
 require 'tarpon/entity/entitlement'
 require 'tarpon/entity/entitlement_list'

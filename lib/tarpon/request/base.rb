@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'http'
 
 module Tarpon
@@ -6,7 +8,7 @@ module Tarpon
       DEFAULT_HEADERS = {
         accept: 'application/json',
         content_type: 'application/json'
-      }
+      }.freeze
 
       protected
 
@@ -17,8 +19,8 @@ module Tarpon
           .timeout(Client.timeout)
           .send(method, "#{Client.base_uri}#{path}", json: body&.compact)
           .then { |response| handle_response(response) }
-        rescue HTTP::TimeoutError => e
-          raise Tarpon::TimeoutError, e
+      rescue HTTP::TimeoutError => e
+        raise Tarpon::TimeoutError, e
       end
 
       def translate_key(key)
@@ -30,14 +32,13 @@ module Tarpon
       def handle_response(response)
         case response.code
         when 401
-          raise Tarpon::InvalidCredentialsError, 'Invalid credentials, fix your API keys'
+          raise Tarpon::InvalidCredentialsError,
+                'Invalid credentials, fix your API keys'
         when 500..505
-          raise Tarpon::ServerError, 'RevenueCat failed to fulfill the request'
+          raise Tarpon::ServerError,
+                'RevenueCat failed to fulfill the request'
         else
-          Tarpon::Response.new(
-            response.status,
-            parse_body(response.body)
-          )
+          Tarpon::Response.new(response.status, parse_body(response.body))
         end
       end
 

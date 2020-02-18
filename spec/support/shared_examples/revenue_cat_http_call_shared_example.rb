@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 def stub_rc_request(method:, api_key:, uri:, headers: {}, body: '')
   default_headers = {
     'Accept' => 'application/json',
     'Authorization' => "Bearer #{described_class.send(api_key.to_s + '_api_key')}",
-    'Content-type' => 'application/json',
+    'Content-type' => 'application/json'
   }
   headers.merge!(default_headers)
   stub_request(method, uri).with(headers: headers, body: body)
@@ -23,9 +25,7 @@ RSpec.shared_examples 'an http call to RevenueCat' do |options|
     before { stubbed_request.to_return(status: 500) }
 
     it 'raises Tarpon::ServerError' do
-      expect {
-        base_call.send(*client_call)
-      }.to raise_error(Tarpon::ServerError)
+      expect { base_call.send(*client_call) }.to raise_error(Tarpon::ServerError)
     end
   end
 
@@ -33,9 +33,7 @@ RSpec.shared_examples 'an http call to RevenueCat' do |options|
     before { stubbed_request.to_return(status: 401) }
 
     it 'raises Tarpon::InvalidCredentialsError' do
-      expect {
-        base_call.send(*client_call)
-      }.to raise_error(Tarpon::InvalidCredentialsError)
+      expect { base_call.send(*client_call) }.to raise_error(Tarpon::InvalidCredentialsError)
     end
   end
 
@@ -43,21 +41,21 @@ RSpec.shared_examples 'an http call to RevenueCat' do |options|
     before { stubbed_request.to_timeout }
 
     it 'raises Tarpon::TimeoutError' do
-      expect {
-        base_call.send(*client_call)
-      }.to raise_error(Tarpon::TimeoutError)
+      expect { base_call.send(*client_call) }.to raise_error(Tarpon::TimeoutError)
     end
   end
 
   context 'when request is successful' do
     let(:double_subscriber) { double('Tarpon::Entity::Subscriber') }
-    let(:subscriber) { { entitlements: { :premium => attributes_for(:entitlement) } } }
+    let(:subscriber) { { entitlements: { premium: attributes_for(:entitlement) } } }
     let(:default_response) { JSON.generate(subscriber: subscriber) }
 
     before do
       stubbed_request.to_return(status: 200, body: defined?(response) ? response : default_response)
-      expect(Tarpon::Entity::Subscriber).to receive(:new)
-        .with(subscriber).and_return(double_subscriber) if options[:response] == :subscriber
+
+      if options[:response] == :subscriber
+        expect(Tarpon::Entity::Subscriber).to receive(:new).with(subscriber).and_return(double_subscriber)
+      end
     end
 
     it 'maps response to internal response object correctly' do

@@ -1,16 +1,17 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
-require 'tarpon/entity/subscriber'
 
 RSpec.describe Tarpon::Entity::EntitlementList do
   subject { described_class.new(entitlements) }
 
-  let(:entitlements) {
+  let(:entitlements) do
     {
       'premium-entitlement-1' => attributes_for(:entitlement),
       'premium-entitlement-2' => attributes_for(:active_entitlement),
-      'premium-entitlement-3' => attributes_for(:active_entitlement),
+      'premium-entitlement-3' => attributes_for(:active_entitlement)
     }
-  }
+  end
 
   describe '#active' do
     it 'returns only active entitlements (expires_date > now)' do

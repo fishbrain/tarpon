@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module Tarpon
   module Configuration
-    attr_accessor :public_api_key, :secret_api_key, :timeout
-    attr_writer :base_uri
+    attr_accessor :public_api_key, :secret_api_key
+    attr_writer :base_uri, :timeout
 
     def configure
       yield self

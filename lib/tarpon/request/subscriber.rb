@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Tarpon
   module Request
     class Subscriber < Base
@@ -5,9 +7,11 @@ module Tarpon
         @app_user_id = app_user_id
       end
 
+      # rubocop:disable Naming/AccessorMethodName
       def get_or_create
         perform(method: :get, path: path, key: :public)
       end
+      # rubocop:enable Naming/AccessorMethodName
 
       def delete
         perform(method: :delete, path: path, key: :secret)
@@ -36,7 +40,7 @@ module Tarpon
         def grant_promotional(duration:, start_time_ms: nil)
           body = {
             duration: duration,
-            start_time_ms: start_time_ms,
+            start_time_ms: start_time_ms
           }
 
           perform(method: :post, path: "#{path}/promotional", key: :secret, body: body)

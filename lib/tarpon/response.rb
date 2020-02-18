@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Tarpon
   class Response
     attr_reader :raw, :subscriber

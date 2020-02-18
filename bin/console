@@ -1,7 +1,8 @@
+# frozen_string_literal: true
 #!/usr/bin/env ruby
 
-require "bundler/setup"
-require "tarpon"
-require "irb"
+require 'bundler/setup'
+require 'tarpon'
+require 'irb'
 
 IRB.start(__FILE__)

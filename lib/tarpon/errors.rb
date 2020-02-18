@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Tarpon
   class Error < StandardError; end
   class TimeoutError < Error; end
