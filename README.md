@@ -1,5 +1,7 @@
 # Tarpon
 
+[![Build Status](https://travis-ci.com/fishbrain/tarpon.svg?branch=master)](https://travis-ci.com/fishbrain/tarpon)
+
 A ruby interface to RevenueCat REST API.
 
 ## Installation
