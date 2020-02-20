@@ -59,6 +59,17 @@ Tarpon::Client
   .grant_promotional(duration: 'daily', start_time_ms: 1582023714931)
 ```
 
+Be aware that RevenueCat doesn't create the subscriber automatically. If the `app_user_id` doesn't exist, the request will fail with a `404 Not Found`. Perform a `Tarpon::Client.subscriber('app_user_id').get_or_create` beforehand to make sure the subscriber exists when granting promotional entitlements:
+
+```ruby
+Tarpon::Client.subscriber('app_user_id').get_or_create # subscriber is created
+
+Tarpon::Client
+  .subscriber('app_user_id')
+  .entitlements('entitlement_id')
+  .grant_promotional(duration: 'daily', start_time_ms: 1582023714931)
+```
+
 Check the [endpoint reference](https://docs.revenuecat.com/reference#grant-a-promotional-entitlement) for valid `duration` values, Tarpon does not perform any input validation.
 
 #### Revoke a promotional entitlement
@@ -96,7 +107,9 @@ Tarpon::Client
 
 ### Handling responses
 
-Tarpon will raise custom errors in a few occasions:
+By default, Tarpon will raise custom errors in the following occasions:
+
+- `Tarpon::NotFoundError` will be raised when RevenueCat server responds with a not found status code.
 
 - `Tarpon::InvalidCredentialsError` will be raised when RevenueCat server responds with unauthorized status code, e.g. invalid API key.
 
@@ -104,6 +117,7 @@ Tarpon will raise custom errors in a few occasions:
 
 - `Tarpon::TimeoutError` will be raised when RevenueCat server takes too long to respond, based on `Tarpon::Client.timeout`.
 
+For success and client error status codes, Tarpon will parse it to the response object.
 
 #### The Response object
 
