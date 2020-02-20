@@ -5,4 +5,5 @@ module Tarpon
   class TimeoutError < Error; end
   class InvalidCredentialsError < Error; end
   class ServerError < Error; end
+  class NotFoundError < Error; end
 end

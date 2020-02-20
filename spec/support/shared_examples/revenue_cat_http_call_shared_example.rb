@@ -21,6 +21,14 @@ RSpec.shared_examples 'an http call to RevenueCat' do |options|
     )
   end
 
+  context 'when server responds with 404' do
+    before { stubbed_request.to_return(status: 404) }
+
+    it 'raises Tarpon::NotFoundError' do
+      expect { base_call.send(*client_call) }.to raise_error(Tarpon::NotFoundError)
+    end
+  end
+
   context 'when server responds with 5xx' do
     before { stubbed_request.to_return(status: 500) }
 
