@@ -38,16 +38,17 @@ module Tarpon
       def create_response(http_response)
         Tarpon::Response.new(http_response.status, parse_body(http_response))
       end
-      def handle_response(http_response, raise_on_error: false)
+
+      def handle_response(http_response)
         case http_response.code
         when 200..299
           create_response(http_response)
         else
-          handle_error(http_response, raise_on_error: raise_on_error)
+          handle_error(http_response)
         end
       end
 
-      def handle_error(http_response, raise_on_error:)
+      def handle_error(http_response)
         case http_response.code
         when 401
           raise Tarpon::InvalidCredentialsError, 'Invalid credentials, fix your API keys'
