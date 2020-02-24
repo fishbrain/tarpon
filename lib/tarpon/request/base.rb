@@ -32,7 +32,7 @@ module Tarpon
       def parse_body(http_response)
         return {} if http_response.body.empty?
 
-        JSON.parse(http_response.body, symbolize_names: true)
+        JSON.parse(http_response.body.to_s, symbolize_names: true)
       end
 
       def create_response(http_response)

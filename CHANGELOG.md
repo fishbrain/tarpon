@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Added some useful links to the readme with some minor text adjustments
+- Explicitly cast response body to string when parsing JSON
 
 ## [0.2.0](https://github.com/fishbrain/tarpon/compare/v0.1.1...v0.2.0) - 2020-02-24
 
