@@ -53,6 +53,18 @@ RSpec.shared_examples 'an http call to RevenueCat' do |options|
     end
   end
 
+  context 'when server responds with bad request status code' do
+    before { stubbed_request.to_return(status: 400, body: JSON.generate(message: 'message')) }
+
+    it 'maps response to internal response object' do
+      r = base_call.send(*client_call)
+
+      expect(r).not_to be_success
+      expect(r.raw[:message]).to eq('message')
+      expect(r.message).to eq(r.raw[:message])
+    end
+  end
+
   context 'when request is successful' do
     let(:double_subscriber) { double('Tarpon::Entity::Subscriber') }
     let(:subscriber) { { entitlements: { premium: attributes_for(:entitlement) } } }
@@ -66,7 +78,7 @@ RSpec.shared_examples 'an http call to RevenueCat' do |options|
       end
     end
 
-    it 'maps response to internal response object correctly' do
+    it 'maps response to internal response object' do
       r = base_call.send(*client_call)
 
       if options[:response] == :custom && defined?(response_expectation)

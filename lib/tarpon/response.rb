@@ -10,6 +10,10 @@ module Tarpon
       @subscriber = @raw[:subscriber].nil? ? nil : Entity::Subscriber.new(@raw[:subscriber])
     end
 
+    def message
+      @raw[:message]
+    end
+
     def success?
       @status.success?
     end
