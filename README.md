@@ -1,8 +1,11 @@
 # Tarpon
 
 [![Build Status](https://travis-ci.com/fishbrain/tarpon.svg?branch=master)](https://travis-ci.com/fishbrain/tarpon)
+[![Gem Version](https://badge.fury.io/rb/tarpon.svg)](https://rubygems.org/gems/tarpon)
 
-A ruby interface to RevenueCat REST API.
+A Ruby interface to [RevenueCat's](https://www.revenuecat.com/) REST API.
+
+[Installation](#installation) | [Usage](#usage) | [API Reference](https://www.rubydoc.info/gems/tarpon/)
 
 ## Installation
 
@@ -28,9 +31,11 @@ Or install it yourself as:
 Tarpon::Client.configure do |c|
   c.public_api_key = 'your-public-key'
   c.secret_api_key = 'your-secret-key'
-  c.timeout        = 1 # a global timeout in seconds for http requests to RevenueCat server, default is 5 seconds
+  c.timeout        = 5 # a global timeout in seconds for http requests to RevenueCat server, default is 5 seconds
 end
 ```
+
+Get your credentials from the [RevenueCat dashboard](https://app.revenuecat.com/apps/). Read more about [authentication on the RevenueCat docs](https://docs.revenuecat.com/docs/authentication).
 
 ### Performing requests
 
@@ -180,6 +185,18 @@ end
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/fishbrain/tarpon.
+
+Clone the repository using
+
+    $ git clone https://github.com/fishbrain/tarpon.git && cd tarpon
+
+Install development dependencies through Bundler
+
+    $ bundle install
+
+Run tests and linter using
+
+    $ bundle exec rspec && bundle exec rubocop
 
 ## License
 
