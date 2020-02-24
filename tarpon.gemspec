@@ -10,14 +10,14 @@ Gem::Specification.new do |spec|
   spec.authors       = ['Igor Belo']
   spec.email         = ['igor.belo@fishbrain.com']
 
-  spec.description   = 'A ruby interface to RevenueCat REST API'
+  spec.description   = 'A Ruby interface to RevenueCat REST API'
   spec.summary       = spec.description
   spec.homepage      = 'https://github.com/fishbrain/tarpon'
   spec.license       = 'MIT'
 
   spec.metadata['homepage_uri'] = spec.homepage
-  spec.metadata['source_code_uri'] = 'https://github.com/fishbrain/tarpon'
-  spec.metadata['changelog_uri'] = 'https://github.com/fishbrain/tarpon/CHANGELOG.md'
+  spec.metadata['source_code_uri'] = 'https://github.com/fishbrain/tarpon.git'
+  spec.metadata['changelog_uri'] = 'https://github.com/fishbrain/tarpon/blob/master/CHANGELOG.md'
 
   spec.files         = Dir['lib/**/*.rb']
   spec.bindir        = 'bin'
