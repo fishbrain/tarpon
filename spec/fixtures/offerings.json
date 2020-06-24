@@ -1,0 +1,23 @@
+{
+  "current_offering_id": "standard",
+  "offerings": [
+    {
+      "description": "The standard set of packages",
+      "identifier": "standard",
+      "packages": [
+        {
+          "identifier": "$rc_monthly",
+          "platform_product_identifier": "i_monthly_2w_9.99"
+        },
+        {
+          "identifier": "$rc_three_month",
+          "platform_product_identifier": "i_quarterly_2w_24.99"
+        },
+        {
+          "identifier": "$rc_annual",
+          "platform_product_identifier": "i_yearly_2w_74.99"
+        }
+      ]
+    }
+  ]
+}
