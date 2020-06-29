@@ -21,6 +21,10 @@ module Tarpon
         self.class::Entitlement.new(subscriber_path: path, entitlement_identifier: entitlement_identifier)
       end
 
+      def offerings
+        self.class::Offering.new(subscriber_path: path)
+      end
+
       def subscriptions(product_id)
         self.class::Subscription.new(subscriber_path: path, product_id: product_id)
       end

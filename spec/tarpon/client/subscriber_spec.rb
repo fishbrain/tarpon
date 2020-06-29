@@ -55,6 +55,43 @@ RSpec.describe Tarpon::Client do
       end
     end
 
+    describe '.delete' do
+      it_behaves_like 'an http call to RevenueCat', method: :delete, api_key: :secret, response: :custom do
+        let(:client_call) { [:delete] }
+        let(:uri) { "https://api.revenuecat.com/v1/subscribers/#{app_user_id}" }
+        let(:response) { JSON.generate(app_user_id: app_user_id) }
+        let(:response_expectation) do
+          lambda do |r|
+            expect(r.raw).to eq(app_user_id: app_user_id)
+            expect(r.subscriber).to be_nil
+          end
+        end
+      end
+    end
+
+    describe '.offerings' do
+      let(:base_call) { described_class.subscriber(app_user_id).offerings }
+      let(:platform) { 'ios' }
+
+      it_behaves_like 'an http call to RevenueCat',
+                      method: :get, api_key: :public, response: :custom do
+        let(:client_call) { [:list, platform] }
+        let(:uri) do
+          "#{described_class.base_uri}/subscribers/#{app_user_id}/offerings"
+        end
+        let(:response) do
+          File.read('spec/fixtures/offerings.json')
+        end
+        let(:response_expectation) do
+          lambda do |r|
+            expect(r.current_offering_id).to eq('standard')
+            expect(r[:standard]).not_to be_nil
+            expect(r['standard'].packages.first.identifier).to eq('$rc_monthly')
+          end
+        end
+      end
+    end
+
     describe '.subscriptions' do
       let(:base_call) { described_class.subscriber(app_user_id).subscriptions(product_id) }
       let(:product_id) { 'monthly' }
