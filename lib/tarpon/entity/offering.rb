@@ -6,19 +6,12 @@ module Tarpon
     class Offering
       attr_reader :identifier, :description, :packages
 
-      def self.from_json(json)
-        id = json[:identifier]
-        description = json[:description]
-        packages = json[:packages].map do |package|
-          Package.new(identifier: package[:identifier], platform_identifier: package[:platform_product_identifier])
-        end
-        new(id, description, packages)
-      end
-
-      def initialize(identifier, description, packages)
+      def initialize(identifier:, description:, packages:, **)
         @identifier = identifier
         @description = description
-        @packages = packages
+        @packages = packages.map do |package|
+          Package.new(package[:identifier], package[:platform_product_identifier])
+        end
       end
     end
   end

@@ -5,23 +5,23 @@ require 'tarpon/entity/offering'
 module Tarpon
   module Entity
     class Offerings
+      include Enumerable
+
       attr_reader :current_offering_id, :offerings
 
-      def self.from_json(json)
-        current_offering = json[:current_offering_id]
-        offerings = json[:offerings].each_with_object({}) do |offering, map|
-          map[offering[:identifier]] = Tarpon::Entity::Offering.from_json(offering)
+      def initialize(current_offering_id:, offerings:, **)
+        @current_offering_id = current_offering_id
+        @offerings = offerings.each_with_object({}) do |offering, map|
+          map[offering[:identifier].to_sym] = Tarpon::Entity::Offering.new(offering)
         end
-        new(current_offering, offerings)
       end
 
-      def initialize(current, offerings)
-        @current_offering_id = current
-        @offerings = offerings
+      def each
+        @offerings.each { |o| yield o }
       end
 
-      def get_by_identifier(identifier)
-        @offerings[identifier]
+      def [](identifier)
+        @offerings[identifier.to_sym]
       end
     end
   end

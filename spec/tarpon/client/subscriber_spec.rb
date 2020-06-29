@@ -85,7 +85,8 @@ RSpec.describe Tarpon::Client do
         let(:response_expectation) do
           lambda do |r|
             expect(r.current_offering_id).to eq('standard')
-            expect(r.get_by_identifier('standard')).not_to be_nil
+            expect(r[:standard]).not_to be_nil
+            expect(r['standard'].packages.first.identifier).to eq('$rc_monthly')
           end
         end
       end

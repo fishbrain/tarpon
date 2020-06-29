@@ -13,5 +13,3 @@ require 'tarpon/request/subscriber/offering'
 require 'tarpon/request/receipt'
 require 'tarpon/response'
 require 'tarpon/version'
-
-API_VERSION = 'v3.0'
