@@ -77,6 +77,17 @@ Tarpon::Client
 
 Check the [endpoint reference](https://docs.revenuecat.com/reference#grant-a-promotional-entitlement) for valid `duration` values, Tarpon does not perform any input validation.
 
+#### List offerings available to subscriber
+```ruby
+Tarpon::Client
+  .subscriber('app_user_id')
+  .offerings
+  .list(platform)
+```
+
+Where platform is one either ios, android, macos, uikitformac or stripe.
+
+Read more about offerings [here](https://docs.revenuecat.com/docs/entitlements#offerings)
 #### Revoke a promotional entitlement
 
 ```ruby
