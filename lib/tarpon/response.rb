@@ -7,7 +7,7 @@ module Tarpon
     def initialize(status, attributes)
       @status     = status
       @raw        = attributes
-      @subscriber = @raw[:subscriber].nil? ? nil : Entity::Subscriber.new(@raw[:subscriber])
+      @subscriber = @raw[:subscriber] && Entity::Subscriber.new(@raw[:subscriber])
     end
 
     def message
