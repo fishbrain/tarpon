@@ -3,7 +3,7 @@
 def stub_rc_request(method:, api_key:, uri:, headers: {}, body: '')
   default_headers = {
     'Accept' => 'application/json',
-    'Authorization' => "Bearer #{described_class.send(api_key.to_s + '_api_key')}",
+    'Authorization' => "Bearer #{described_class.send("#{api_key}_api_key")}",
     'Content-type' => 'application/json'
   }
   headers.merge!(default_headers)
@@ -25,7 +25,7 @@ RSpec.shared_examples 'an http call to RevenueCat' do |options|
     before { stubbed_request.to_return(status: 404) }
 
     it 'raises Tarpon::NotFoundError' do
-      expect { base_call.send(*client_call) }.to raise_error(Tarpon::NotFoundError)
+      expect { client_call }.to raise_error(Tarpon::NotFoundError)
     end
   end
 
@@ -33,7 +33,7 @@ RSpec.shared_examples 'an http call to RevenueCat' do |options|
     before { stubbed_request.to_return(status: 500) }
 
     it 'raises Tarpon::ServerError' do
-      expect { base_call.send(*client_call) }.to raise_error(Tarpon::ServerError)
+      expect { client_call }.to raise_error(Tarpon::ServerError)
     end
   end
 
@@ -41,7 +41,7 @@ RSpec.shared_examples 'an http call to RevenueCat' do |options|
     before { stubbed_request.to_return(status: 401) }
 
     it 'raises Tarpon::InvalidCredentialsError' do
-      expect { base_call.send(*client_call) }.to raise_error(Tarpon::InvalidCredentialsError)
+      expect { client_call }.to raise_error(Tarpon::InvalidCredentialsError)
     end
   end
 
@@ -49,7 +49,7 @@ RSpec.shared_examples 'an http call to RevenueCat' do |options|
     before { stubbed_request.to_timeout }
 
     it 'raises Tarpon::TimeoutError' do
-      expect { base_call.send(*client_call) }.to raise_error(Tarpon::TimeoutError)
+      expect { client_call }.to raise_error(Tarpon::TimeoutError)
     end
   end
 
@@ -57,7 +57,7 @@ RSpec.shared_examples 'an http call to RevenueCat' do |options|
     before { stubbed_request.to_return(status: 400, body: JSON.generate(message: 'message')) }
 
     it 'maps response to internal response object' do
-      r = base_call.send(*client_call)
+      r = client_call
 
       expect(r).not_to be_success
       expect(r.raw[:message]).to eq('message')
@@ -79,7 +79,7 @@ RSpec.shared_examples 'an http call to RevenueCat' do |options|
     end
 
     it 'maps response to internal response object' do
-      r = base_call.send(*client_call)
+      r = client_call
 
       if options[:response] == :custom && defined?(response_expectation)
         response_expectation.call(r)

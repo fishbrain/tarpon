@@ -6,8 +6,6 @@ RSpec.describe Tarpon::Client do
   let(:app_user_id) { 'app-user-id' }
 
   describe '.receipt' do
-    let(:base_call) { described_class.receipt }
-
     describe '.create' do
       it_behaves_like 'an http call to RevenueCat responding with subscriber object', method: :post, api_key: :public do
         let(:platform) { 'ios' }
@@ -19,7 +17,7 @@ RSpec.describe Tarpon::Client do
             fetch_token: 'fetch-token'
           }
         end
-        let(:client_call) { [:create, platform: platform, **body] }
+        let(:client_call) { described_class.receipt.create(platform: platform, **body) }
       end
     end
   end

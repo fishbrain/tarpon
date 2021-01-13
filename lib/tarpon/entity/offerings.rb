@@ -12,12 +12,12 @@ module Tarpon
       def initialize(current_offering_id:, offerings:, **)
         @current_offering_id = current_offering_id
         @offerings = offerings.each_with_object({}) do |offering, map|
-          map[offering[:identifier].to_sym] = Tarpon::Entity::Offering.new(offering)
+          map[offering[:identifier].to_sym] = Tarpon::Entity::Offering.new(**offering)
         end
       end
 
-      def each
-        @offerings.each { |o| yield o }
+      def each(&block)
+        @offerings.each(&block)
       end
 
       def [](identifier)
