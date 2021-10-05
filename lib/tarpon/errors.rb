@@ -6,4 +6,5 @@ module Tarpon
   class InvalidCredentialsError < Error; end
   class ServerError < Error; end
   class NotFoundError < Error; end
+  class TooManyRequests < Error; end
 end

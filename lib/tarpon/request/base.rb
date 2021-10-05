@@ -56,6 +56,8 @@ module Tarpon
           raise Tarpon::ServerError, 'RevenueCat failed to fulfill the request'
         when 404
           raise Tarpon::NotFoundError
+        when 429
+          raise Tarpon::TooManyRequests
         else
           create_response(http_response)
         end
