@@ -133,6 +133,8 @@ By default, Tarpon will raise custom errors in the following occasions:
 
 - `Tarpon::TimeoutError` will be raised when RevenueCat server takes too long to respond, based on `Tarpon::Client.timeout`.
 
+- `Tarpon::TooManyRequests` will be raise when RevenueCat server responds with 429 status code.
+
 For success and client error status codes, Tarpon will parse it to the response object.
 
 #### The Response object
