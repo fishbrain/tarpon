@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased](https://github.com/fishbrain/tarpon/compare/v0.3.0...HEAD)
 
+## [0.3.1](https://github.com/fishbrain/tarpon/compare/v0.3.0...v0.3.1) - 2021-10-07
+
+### Added
+- Add `purchase_date` accessor to `Entity::Entitlement` from [@pierrea](https://github.com/pierrea)
+- Add `Tarpon::TooManyRequests` error
+
 ## [0.3.0](https://github.com/fishbrain/tarpon/compare/v0.2.1...v0.3.0) - 2020-06-29
 
 ### Added
