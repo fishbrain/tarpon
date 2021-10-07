@@ -17,6 +17,10 @@ module Tarpon
       def expires_date
         Time.iso8601(@raw[:expires_date])
       end
+
+      def purchase_date
+        Time.iso8601(@raw[:purchase_date])
+      end
     end
   end
 end
