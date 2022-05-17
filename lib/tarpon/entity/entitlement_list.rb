@@ -17,8 +17,8 @@ module Tarpon
         @entitlements.select(&:active?)
       end
 
-      def each
-        @entitlements.each { |e| yield e }
+      def each(&block)
+        @entitlements.each(&block)
       end
     end
   end

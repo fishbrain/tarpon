@@ -12,3 +12,5 @@
 
 .rake_t_cache
 *.gem
+
+Gemfile.lock

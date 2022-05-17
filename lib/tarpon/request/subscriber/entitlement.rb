@@ -5,6 +5,7 @@ module Tarpon
     class Subscriber
       class Entitlement < Base
         def initialize(subscriber_path:, entitlement_identifier:)
+          super()
           @subscriber_path = subscriber_path
           @entitlement_identifier = entitlement_identifier
         end

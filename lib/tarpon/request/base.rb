@@ -18,7 +18,7 @@ module Tarpon
           .auth("Bearer #{api_key(key)}")
           .headers(headers.merge(DEFAULT_HEADERS))
           .send(method, "#{Client.base_uri}#{path}", json: body&.compact)
-          .yield_self { |http_response| handle_response(http_response) }
+          .then { |http_response| handle_response(http_response) }
       rescue HTTP::TimeoutError => e
         raise Tarpon::TimeoutError, e
       end
