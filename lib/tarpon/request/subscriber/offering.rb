@@ -7,6 +7,7 @@ module Tarpon
     class Subscriber
       class Offering < Base
         def initialize(subscriber_path:)
+          super()
           @subscriber_path = subscriber_path
         end
 
@@ -14,7 +15,7 @@ module Tarpon
           response = perform(method: :get, path: path.to_s, headers: { 'x-platform': platform.to_s }, key: :public)
           return response unless response.success?
 
-          Tarpon::Entity::Offerings.new(response.raw)
+          Tarpon::Entity::Offerings.new(**response.raw)
         end
 
         private

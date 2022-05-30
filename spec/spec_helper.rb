@@ -4,7 +4,7 @@ require 'bundler/setup'
 require 'tarpon'
 require 'factory_bot'
 require 'webmock/rspec'
-Dir[File.dirname(__FILE__) + '/support/**/*.rb'].sort.each { |file| require file }
+Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].sort.each { |file| require file }
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

@@ -18,18 +18,20 @@ Gem::Specification.new do |spec|
   spec.metadata['homepage_uri'] = spec.homepage
   spec.metadata['source_code_uri'] = 'https://github.com/fishbrain/tarpon.git'
   spec.metadata['changelog_uri'] = 'https://github.com/fishbrain/tarpon/blob/master/CHANGELOG.md'
+  spec.metadata['rubygems_mfa_required'] = 'true'
 
   spec.files         = Dir['lib/**/*.rb']
   spec.bindir        = 'bin'
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
-  spec.add_dependency 'http', '~> 4.3'
+  spec.required_ruby_version = '>= 2.7'
 
-  spec.add_development_dependency 'bundler', '~> 2.0'
-  spec.add_development_dependency 'factory_bot', '~> 5.1'
-  spec.add_development_dependency 'rake', '~> 12.3'
-  spec.add_development_dependency 'rspec', '~> 3.0'
-  spec.add_development_dependency 'rubocop', '~> 0.80'
-  spec.add_development_dependency 'webmock', '~> 3.8'
+  spec.add_dependency 'http', '~> 4.4'
+
+  spec.add_development_dependency 'factory_bot', '~> 6.2'
+  spec.add_development_dependency 'rake', '~> 13.0'
+  spec.add_development_dependency 'rspec', '~> 3.11'
+  spec.add_development_dependency 'rubocop', '~> 1.29'
+  spec.add_development_dependency 'webmock', '~> 3.14'
 end

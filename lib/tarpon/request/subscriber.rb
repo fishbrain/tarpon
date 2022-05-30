@@ -4,14 +4,13 @@ module Tarpon
   module Request
     class Subscriber < Base
       def initialize(app_user_id:)
+        super()
         @app_user_id = app_user_id
       end
 
-      # rubocop:disable Naming/AccessorMethodName
-      def get_or_create
+      def get_or_create # rubocop:disable Naming/AccessorMethodName
         perform(method: :get, path: path, key: :public)
       end
-      # rubocop:enable Naming/AccessorMethodName
 
       def delete
         perform(method: :delete, path: path, key: :secret)
