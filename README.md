@@ -61,6 +61,12 @@ PROEJCT_1_RC_CLIENT
   .get_or_create
 ```
 
+You can also pass configuration values as a Hash to the `Tarpon::Client` constructor, if desired:
+
+```ruby
+Tarpon::Client.new(public_api_key: 'public-key', private_api_key: 'private-key')
+```
+
 ### Performing requests
 
 #### Get or create a subscriber

@@ -11,7 +11,8 @@ module Tarpon
       @default ||= new
     end
 
-    def initialize(&block)
+    def initialize(**config, &block)
+      config.each { |key, val| send("#{key}=", val) }
       yield self if block
     end
 

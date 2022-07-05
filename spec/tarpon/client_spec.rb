@@ -17,4 +17,18 @@ RSpec.describe Tarpon::Client do
       end
     end
   end
+
+  it 'receives configuration values when instantiating' do
+    subject = described_class.new(
+      public_api_key: 'public-key',
+      secret_api_key: 'secret-key',
+      timeout: 3,
+      base_uri: 'https://example.com'
+    )
+
+    expect(subject.public_api_key).to eq('public-key')
+    expect(subject.secret_api_key).to eq('secret-key')
+    expect(subject.timeout).to eq(3)
+    expect(subject.base_uri).to eq('https://example.com')
+  end
 end
