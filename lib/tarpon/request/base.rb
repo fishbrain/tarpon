@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'http'
+require 'tarpon/client'
 
 module Tarpon
   module Request
@@ -10,14 +11,18 @@ module Tarpon
         content_type: 'application/json'
       }.freeze
 
+      def initialize(client: Client.default)
+        @client = client
+      end
+
       protected
 
       def perform(method:, path:, key:, headers: {}, body: nil)
         HTTP
-          .timeout(Client.timeout)
+          .timeout(@client.timeout)
           .auth("Bearer #{api_key(key)}")
           .headers(headers.merge(DEFAULT_HEADERS))
-          .send(method, "#{Client.base_uri}#{path}", json: body&.compact)
+          .send(method, "#{@client.base_uri}#{path}", json: body&.compact)
           .then { |http_response| handle_response(http_response) }
       rescue HTTP::TimeoutError => e
         raise Tarpon::TimeoutError, e
@@ -26,7 +31,7 @@ module Tarpon
       private
 
       def api_key(type)
-        Client.send("#{type}_api_key")
+        @client.send("#{type}_api_key")
       end
 
       def parse_body(http_response)

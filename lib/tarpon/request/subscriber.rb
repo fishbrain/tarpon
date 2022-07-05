@@ -3,8 +3,8 @@
 module Tarpon
   module Request
     class Subscriber < Base
-      def initialize(app_user_id:)
-        super()
+      def initialize(app_user_id:, **opts)
+        super(**opts)
         @app_user_id = app_user_id
       end
 
