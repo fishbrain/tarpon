@@ -37,6 +37,30 @@ end
 
 Get your credentials from the [RevenueCat dashboard](https://app.revenuecat.com/apps/). Read more about [authentication on the RevenueCat docs](https://docs.revenuecat.com/docs/authentication).
 
+#### Configuring multiple clients
+
+If you need to support different configurations (e.g. to target different RevenueCat projects), you can instantiate different Tarpon clients. For example:
+
+```ruby
+PROJECT_1_RC_CLIENT = Tarpon::Client.new do |c|
+  c.public_api_key = 'project-1-public-key'
+  c.secret_api_key = 'project-1-secret-key'
+end
+
+PROJECT_2_RC_CLIENT = Tarpon::Client.new do |c|
+  c.public_api_key = 'project-2-public-key'
+  c.secret_api_key = 'project-2-secret-key'
+end
+```
+
+And then you can use them instead of calling methods on `Tarpon::Client`. For example:
+
+```ruby
+PROEJCT_1_RC_CLIENT
+  .subscriber('app_user_id')
+  .get_or_create
+```
+
 ### Performing requests
 
 #### Get or create a subscriber
