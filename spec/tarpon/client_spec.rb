@@ -12,6 +12,8 @@ RSpec.describe Tarpon::Client do
 
       let(:client) do
         Tarpon::Client.new do |c|
+          c.public_api_key = 'test-public-key'
+          c.secret_api_key = 'test-secret-key'
           c.base_uri = 'https://example.com/client_1'
         end
       end

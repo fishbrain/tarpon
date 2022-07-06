@@ -24,6 +24,10 @@ RSpec.shared_examples 'an http call to RevenueCat' do |options|
 
   let(:client) { described_class }
 
+  it 'has a configured API key' do
+    expect(client.send("#{options[:api_key]}_api_key")).to_not be_nil
+  end
+
   context 'when server responds with 404' do
     before { stubbed_request.to_return(status: 404) }
 

@@ -17,15 +17,19 @@ module Tarpon
       end
 
       def entitlements(entitlement_identifier)
-        self.class::Entitlement.new(subscriber_path: path, entitlement_identifier: entitlement_identifier)
+        self.class::Entitlement.new(
+          subscriber_path: path,
+          entitlement_identifier: entitlement_identifier,
+          client: @client
+        )
       end
 
       def offerings
-        self.class::Offering.new(subscriber_path: path)
+        self.class::Offering.new(subscriber_path: path, client: @client)
       end
 
       def subscriptions(product_id)
-        self.class::Subscription.new(subscriber_path: path, product_id: product_id)
+        self.class::Subscription.new(subscriber_path: path, product_id: product_id, client: @client)
       end
 
       private

@@ -4,8 +4,8 @@ module Tarpon
   module Request
     class Subscriber
       class Subscription < Base
-        def initialize(subscriber_path:, product_id:)
-          super()
+        def initialize(subscriber_path:, product_id:, **opts)
+          super(**opts)
           @subscriber_path = subscriber_path
           @product_id = product_id
         end
