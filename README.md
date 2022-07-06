@@ -225,6 +225,22 @@ response.subscriber.entitlements.each do |entitlement|
 end
 ```
 
+## Advanced HTTP configuration
+
+You can access the HTTP requests as they are performed for advanced configuration, allowing you to configure things such as logging, instrumentation, more granular timeouts, or using an HTTP proxy.
+
+Under the hood, Tarpon uses the [HTTP.rb](https://github.com/httprb/http) library, which provides an easy to extend API to configure HTTP requests. You can access this by providing a custom `http` Proc when configuring a `Tarpon::Client`.
+
+```ruby
+Tarpon::Client.configure do |c|
+  c.http = ->(http) do
+    http
+      .use(instrumentation: { instrumenter: ActiveSupport::Notifications.instrumenter })
+      .via('https://custom.proxy.com', 8080)
+  end
+end
+```
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/fishbrain/tarpon.
