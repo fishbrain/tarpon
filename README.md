@@ -229,12 +229,12 @@ end
 
 You can access the HTTP requests as they are performed for advanced configuration, allowing you to configure things such as logging, instrumentation, more granular timeouts, or using an HTTP proxy.
 
-Under the hood, Tarpon uses the [HTTP.rb](https://github.com/httprb/http) library, which provides an easy to extend API to configure HTTP requests. You can access this by providing a custom `http` Proc when configuring a `Tarpon::Client`.
+Under the hood, Tarpon uses the [HTTP.rb](https://github.com/httprb/http) library, which provides an easy to extend API to configure HTTP requests. You can access this by providing a custom `http_middleware` Proc when configuring a `Tarpon::Client` that receives and returns an `HTTP::Client`.
 
 ```ruby
 Tarpon::Client.configure do |c|
-  c.http = ->(http) do
-    http
+  c.http_middleware = ->(http_client) do
+    http_client
       .use(instrumentation: { instrumenter: ActiveSupport::Notifications.instrumenter })
       .via('https://custom.proxy.com', 8080)
   end

@@ -21,30 +21,30 @@ RSpec.describe Tarpon::Client do
   end
 
   it 'receives configuration values when instantiating' do
-    http_proc = ->(http) { http }
+    http_middleware = ->(http_client) { http_client }
 
     subject = described_class.new(
       public_api_key: 'public-key',
       secret_api_key: 'secret-key',
       timeout: 3,
       base_uri: 'https://example.com',
-      http: http_proc
+      http_middleware: http_middleware
     )
 
     expect(subject.public_api_key).to eq('public-key')
     expect(subject.secret_api_key).to eq('secret-key')
     expect(subject.timeout).to eq(3)
     expect(subject.base_uri).to eq('https://example.com')
-    expect(subject.http).to eq(http_proc)
+    expect(subject.http_middleware).to eq(http_middleware)
   end
 
   describe 'advanced HTTP request configuration' do
     let(:http_calls) { [] }
     let(:client) do
       Tarpon::Client.new do |c|
-        c.http = lambda do |http_call|
-          http_calls << http_call
-          http_call
+        c.http_middleware = lambda do |http_client|
+          http_calls << http_client
+          http_client
         end
       end
     end

@@ -3,7 +3,7 @@
 module Tarpon
   module Configuration
     attr_accessor :public_api_key, :secret_api_key
-    attr_writer :base_uri, :timeout, :http
+    attr_writer :base_uri, :timeout, :http_middleware
 
     def configure
       yield self
@@ -17,8 +17,8 @@ module Tarpon
       @timeout || 5
     end
 
-    def http
-      @http || ->(http) { http }
+    def http_middleware
+      @http_middleware ||= ->(http_client) { http_client }
     end
   end
 end

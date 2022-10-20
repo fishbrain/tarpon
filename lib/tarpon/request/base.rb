@@ -20,7 +20,7 @@ module Tarpon
       def perform(method:, path:, key:, headers: {}, body: nil)
         HTTP
           .timeout(@client.timeout)
-          .then { |http_client| @client.http.call(http_client) }
+          .then { |http_client| @client.http_middleware.call(http_client) }
           .auth("Bearer #{api_key(key)}")
           .headers(headers.merge(DEFAULT_HEADERS))
           .send(method, "#{@client.base_uri}#{path}", json: body&.compact)
