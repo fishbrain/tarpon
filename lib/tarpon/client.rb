@@ -12,7 +12,7 @@ module Tarpon
     end
 
     def initialize(**config, &block)
-      config.each { |key, val| send("#{key}=", val) }
+      config.each { |key, val| public_send("#{key}=", val) }
       yield self if block
     end
 
