@@ -37,6 +37,36 @@ end
 
 Get your credentials from the [RevenueCat dashboard](https://app.revenuecat.com/apps/). Read more about [authentication on the RevenueCat docs](https://docs.revenuecat.com/docs/authentication).
 
+#### Configuring multiple clients
+
+If you need to support different configurations (e.g. to target different RevenueCat projects), you can instantiate different Tarpon clients. For example:
+
+```ruby
+PROJECT_1_RC_CLIENT = Tarpon::Client.new do |c|
+  c.public_api_key = 'project-1-public-key'
+  c.secret_api_key = 'project-1-secret-key'
+end
+
+PROJECT_2_RC_CLIENT = Tarpon::Client.new do |c|
+  c.public_api_key = 'project-2-public-key'
+  c.secret_api_key = 'project-2-secret-key'
+end
+```
+
+And then you can use them instead of calling methods on `Tarpon::Client`. For example:
+
+```ruby
+PROEJCT_1_RC_CLIENT
+  .subscriber('app_user_id')
+  .get_or_create
+```
+
+You can also pass configuration values as a Hash to the `Tarpon::Client` constructor, if desired:
+
+```ruby
+Tarpon::Client.new(public_api_key: 'public-key', private_api_key: 'private-key')
+```
+
 ### Performing requests
 
 #### Get or create a subscriber
@@ -192,6 +222,22 @@ response.subscriber.entitlements.active
 response.subscriber.entitlements.each do |entitlement|
   entitlement.expires_date # Ruby time parsed from iso8601
   entitlement.active? # true if expires_date > Time.now.utc
+end
+```
+
+## Advanced HTTP configuration
+
+You can access the HTTP requests as they are performed for advanced configuration, allowing you to configure things such as logging, instrumentation, more granular timeouts, or using an HTTP proxy.
+
+Under the hood, Tarpon uses the [HTTP.rb](https://github.com/httprb/http) library, which provides an easy to extend API to configure HTTP requests. You can access this by providing a custom `http_middleware` Proc when configuring a `Tarpon::Client` that receives and returns an `HTTP::Client`.
+
+```ruby
+Tarpon::Client.configure do |c|
+  c.http_middleware = ->(http_client) do
+    http_client
+      .use(instrumentation: { instrumenter: ActiveSupport::Notifications.instrumenter })
+      .via('https://custom.proxy.com', 8080)
+  end
 end
 ```
 

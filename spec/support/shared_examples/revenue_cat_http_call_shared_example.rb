@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-def stub_rc_request(method:, api_key:, uri:, headers: {}, body: '')
+def stub_rc_request(method:, api_key:, uri:, client:, headers: {}, body: '') # rubocop:disable Metrics/ParameterLists
   default_headers = {
     'Accept' => 'application/json',
-    'Authorization' => "Bearer #{described_class.send("#{api_key}_api_key")}",
+    'Authorization' => "Bearer #{client.send("#{api_key}_api_key")}",
     'Content-type' => 'application/json'
   }
   headers.merge!(default_headers)
@@ -17,8 +17,15 @@ RSpec.shared_examples 'an http call to RevenueCat' do |options|
       api_key: options[:api_key],
       headers: defined?(headers) ? headers : {},
       body: defined?(body) ? JSON.generate(body) : nil,
-      uri: uri
+      uri: uri,
+      client: client
     )
+  end
+
+  let(:client) { described_class }
+
+  it 'has a configured API key' do
+    expect(client.send("#{options[:api_key]}_api_key")).to_not be_nil
   end
 
   context 'when server responds with 404' do

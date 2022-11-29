@@ -10,14 +10,14 @@ RSpec.describe Tarpon::Client do
       it_behaves_like 'an http call to RevenueCat responding with subscriber object', method: :post, api_key: :public do
         let(:platform) { 'ios' }
         let(:headers) { { 'X-Platform' => platform } }
-        let(:uri) { "#{described_class.base_uri}/receipts" }
+        let(:uri) { "#{client.base_uri}/receipts" }
         let(:body) do
           {
             app_user_id: app_user_id,
             fetch_token: 'fetch-token'
           }
         end
-        let(:client_call) { described_class.receipt.create(platform: platform, **body) }
+        let(:client_call) { client.receipt.create(platform: platform, **body) }
       end
     end
   end
