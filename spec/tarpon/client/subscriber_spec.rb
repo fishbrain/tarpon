@@ -13,6 +13,29 @@ RSpec.describe Tarpon::Client do
       end
     end
 
+    describe '.update' do
+      it_behaves_like 'an http call to RevenueCat', method: :post, api_key: :public, response: :custom do
+        let(:uri) { "#{described_class.base_uri}/subscribers/#{app_user_id}/attributes" }
+        let(:body) do
+          {
+            attributes: {
+              '$email': {
+                value: 'test@example.com'
+              }
+            }
+          }
+        end
+        let(:client_call) { described_class.subscriber(app_user_id).update(**body) }
+        let(:response) { '' }
+        let(:response_expectation) do
+          lambda do |r|
+            expect(r.raw).to be_empty
+            expect(r.subscriber).to be_nil
+          end
+        end
+      end
+    end
+
     describe '.delete' do
       it_behaves_like 'an http call to RevenueCat', method: :delete, api_key: :secret, response: :custom do
         let(:client_call) { described_class.subscriber(app_user_id).delete }
