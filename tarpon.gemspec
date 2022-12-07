@@ -30,7 +30,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'http', '~> 4.4'
 
   # last release before version 7 which requires Ruby 2.7. factory_bot needs activesupport and will go for v7 if no other is provided.
-  spec.add_development_dependency 'activesupport', '6.1.7'
+  spec.add_development_dependency 'activesupport', '6.1.7' if Gem::Version.new(RUBY_VERSION) < Gem::Version.new('2.7')
   spec.add_development_dependency 'factory_bot', '~> 6.2'
   spec.add_development_dependency 'rake', '~> 13.0'
   spec.add_development_dependency 'rspec', '~> 3.11'
