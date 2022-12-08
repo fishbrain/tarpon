@@ -77,6 +77,17 @@ Tarpon::Client
   .get_or_create
 ```
 
+#### Update subscriber attributes
+
+```ruby
+Tarpon::Client
+  .subscriber('app_user_id')
+  .attributes
+  .update('$email': {
+    value: 'test@example.com'
+  })
+```
+
 #### Delete a subscriber
 
 ```ruby
