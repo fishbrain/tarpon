@@ -84,8 +84,8 @@ Tarpon::Client
   .subscriber('app_user_id')
   .attributes
   .update('$email': {
-      value: 'test@example.com'
-    })
+    value: 'test@example.com'
+  })
 ```
 
 #### Delete a subscriber
