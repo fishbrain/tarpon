@@ -18,8 +18,10 @@ RSpec.describe Tarpon::Client do
         let(:uri) { "#{described_class.base_uri}/subscribers/#{app_user_id}/attributes" }
         let(:body) do
           {
-            '$email': {
-              value: 'test@example.com'
+            attributes: {
+              '$email': {
+                value: 'test@example.com'
+              }
             }
           }
         end
