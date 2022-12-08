@@ -12,10 +12,6 @@ module Tarpon
         perform(method: :get, path: path, key: :public)
       end
 
-      def update(**data)
-        perform(method: :post, path: "#{path}/attributes", key: :public, body: data)
-      end
-
       def delete
         perform(method: :delete, path: path, key: :secret)
       end
@@ -26,6 +22,10 @@ module Tarpon
           entitlement_identifier: entitlement_identifier,
           client: @client
         )
+      end
+
+      def attributes
+        self.class::Attribute.new(subscriber_path: path, client: @client)
       end
 
       def offerings

@@ -82,11 +82,10 @@ Tarpon::Client
 ```ruby
 Tarpon::Client
   .subscriber('app_user_id')
-  .update(attributes: {
-    '$email': {
+  .attributes
+  .update('$email': {
       value: 'test@example.com'
-    }
-  })
+    })
 ```
 
 #### Delete a subscriber
