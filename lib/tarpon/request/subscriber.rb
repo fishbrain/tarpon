@@ -24,6 +24,10 @@ module Tarpon
         )
       end
 
+      def attributes
+        self.class::Attribute.new(subscriber_path: path, client: @client)
+      end
+
       def offerings
         self.class::Offering.new(subscriber_path: path, client: @client)
       end

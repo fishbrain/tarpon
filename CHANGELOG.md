@@ -4,7 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/fishbrain/tarpon/compare/v0.4.0...HEAD)
+## [Unreleased](https://github.com/fishbrain/tarpon/compare/v0.5.0...HEAD)
+
+## [0.5.0](https://github.com/fishbrain/tarpon/compare/v0.4.0...v0.5.0) - 2022-12-01
+
+### Added
+- Support instantiating different API clients, and advanced HTTP configuration from [@foca](https://github.com/foca) (PR [#14](https://github.com/fishbrain/tarpon/pull/14))
 
 ## [0.4.0](https://github.com/fishbrain/tarpon/compare/v0.3.1...v0.4.0) - 2022-06-02
 
