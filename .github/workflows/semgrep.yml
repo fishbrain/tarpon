@@ -5,7 +5,7 @@ name: Semgrep
 on:
   pull_request: {}
   schedule:
-    - cron: '0 2 * * 5' # Once a week at 2am.
+    - cron: '0 2 * * 4' # Once a week at 2am.
 
 jobs:
   semgrep:
