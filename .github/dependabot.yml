@@ -8,13 +8,13 @@ version: 2
   "open-pull-requests-limit": 10
   "package-ecosystem": "github-actions"
   "reviewers":
-  - "fishbrain/tuna-backend-team"
+  - "fishbrain/product-growth-backend-developers"
   "schedule":
     "interval": "daily"
 - "directory": "/"
   "open-pull-requests-limit": 10
   "package-ecosystem": "bundler"
   "reviewers":
-  - "fishbrain/tuna-backend-team"
+  - "fishbrain/product-growth-backend-developers"
   "schedule":
     "interval": "daily"
