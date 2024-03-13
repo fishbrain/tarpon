@@ -7,7 +7,7 @@ module Tarpon
 
       def initialize(attributes = {})
         @raw          = attributes
-        @entitlements = EntitlementList.new(attributes[:entitlements])
+        @entitlements = EntitlementList.new(attributes[:entitlements] || {})
       end
     end
   end
