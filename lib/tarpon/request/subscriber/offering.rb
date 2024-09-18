@@ -11,6 +11,14 @@ module Tarpon
           @subscriber_path = subscriber_path
         end
 
+        def create_override(offering_id)
+          perform(method: :post, path: "#{path}/#{offering_id}/override", key: :secret)
+        end
+
+        def remove_override
+          perform(method: :delete, path: "#{path}/override", key: :secret)
+        end
+
         def list(platform)
           response = perform(method: :get, path: path.to_s, headers: { 'x-platform': platform.to_s }, key: :public)
           return response unless response.success?
