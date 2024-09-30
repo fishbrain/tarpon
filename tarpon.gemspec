@@ -29,9 +29,9 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'http', '~> 4.4'
 
-  spec.add_development_dependency 'factory_bot', '~> 6.2'
-  spec.add_development_dependency 'rake', '~> 13.0'
-  spec.add_development_dependency 'rspec', '~> 3.11'
-  spec.add_development_dependency 'rubocop', '~> 1.29'
-  spec.add_development_dependency 'webmock', '~> 3.14'
+  spec.add_development_dependency 'factory_bot', '~> 6.2' # rubocop:disable Gemspec/DevelopmentDependencies
+  spec.add_development_dependency 'rake', '~> 13.0' # rubocop:disable Gemspec/DevelopmentDependencies
+  spec.add_development_dependency 'rspec', '~> 3.11' # rubocop:disable Gemspec/DevelopmentDependencies
+  spec.add_development_dependency 'rubocop', '~> 1.29' # rubocop:disable Gemspec/DevelopmentDependencies
+  spec.add_development_dependency 'webmock', '~> 3.14' # rubocop:disable Gemspec/DevelopmentDependencies
 end
