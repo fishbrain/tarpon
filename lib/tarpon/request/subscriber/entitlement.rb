@@ -10,11 +10,12 @@ module Tarpon
           @entitlement_identifier = entitlement_identifier
         end
 
-        def grant_promotional(duration:, start_time_ms: nil)
+        def grant_promotional(duration: nil, start_time_ms: nil, end_time_ms: nil)
           body = {
             duration: duration,
-            start_time_ms: start_time_ms
-          }
+            start_time_ms: start_time_ms,
+            end_time_ms: end_time_ms
+          }.compact
 
           perform(method: :post, path: "#{path}/promotional", key: :secret, body: body)
         end
