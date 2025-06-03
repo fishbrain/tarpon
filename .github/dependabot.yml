@@ -7,14 +7,10 @@ version: 2
 - "directory": "/"
   "open-pull-requests-limit": 10
   "package-ecosystem": "github-actions"
-  "reviewers":
-  - "fishbrain/product-growth-backend-developers"
   "schedule":
     "interval": "daily"
 - "directory": "/"
   "open-pull-requests-limit": 10
   "package-ecosystem": "bundler"
-  "reviewers":
-  - "fishbrain/product-growth-backend-developers"
   "schedule":
     "interval": "daily"
