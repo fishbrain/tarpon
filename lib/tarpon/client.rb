@@ -18,6 +18,7 @@ module Tarpon
 
     class << self
       extend Forwardable
+
       def_delegators :default, *Configuration.public_instance_methods(true)
       def_delegators :default, :subscriber, :receipt
     end
