@@ -1,0 +1,54 @@
+{
+  "description": "This file is managed by Terraform. Manual changes will be overwritten. To update this file, look for the `renovate_config` module being used in the `repositories` directory in our Terraform repo.",
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:best-practices",
+    ":automergePatch",
+    ":rebaseStalePrs"
+  ],
+  "minimumReleaseAge": "7 days",
+  "prConcurrentLimit": 10,
+  "reviewersFromCodeOwners": true,
+  "ignorePaths": [
+    "node_modules/**",
+    ".github/workflows/semgrep.yml"
+  ],
+  "packageRules": [
+    {
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "pin",
+        "digest"
+      ],
+      "matchPackageNames": [
+        "@types/**"
+      ],
+      "automerge": true
+    },
+    {
+      "automerge": true,
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "pin",
+        "digest"
+      ],
+      "extends": [
+        "packages:linters"
+      ]
+    },
+    {
+      "automerge": true,
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "pin",
+        "digest"
+      ],
+      "extends": [
+        "packages:test"
+      ]
+    }
+  ]
+}
