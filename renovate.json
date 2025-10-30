@@ -1,54 +1,55 @@
 {
-  "description": "This file is managed by Terraform. Manual changes will be overwritten. To update this file, look for the `renovate_config` module being used in the `repositories` directory in our Terraform repo.",
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:best-practices",
-    ":automergePatch",
-    ":rebaseStalePrs"
-  ],
-  "minimumReleaseAge": "7 days",
-  "prConcurrentLimit": 10,
-  "reviewersFromCodeOwners": true,
-  "ignorePaths": [
-    "node_modules/**",
-    ".github/workflows/semgrep.yml"
-  ],
-  "packageRules": [
-    {
-      "matchUpdateTypes": [
-        "minor",
-        "patch",
-        "pin",
-        "digest"
-      ],
-      "matchPackageNames": [
-        "@types/**"
-      ],
-      "automerge": true
-    },
-    {
-      "automerge": true,
-      "matchUpdateTypes": [
-        "minor",
-        "patch",
-        "pin",
-        "digest"
-      ],
-      "extends": [
-        "packages:linters"
-      ]
-    },
-    {
-      "automerge": true,
-      "matchUpdateTypes": [
-        "minor",
-        "patch",
-        "pin",
-        "digest"
-      ],
-      "extends": [
-        "packages:test"
-      ]
-    }
-  ]
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "automerge": null,
+    "description": "This file is managed by Terraform. Manual changes will be overwritten. To update this file, look for the `renovate_config` module being used in the `repositories` directory in our Terraform repo.",
+    "extends": [
+        "config:best-practices",
+        ":automergePatch",
+        ":rebaseStalePrs"
+    ],
+    "ignorePaths": [
+        "node_modules/**",
+        ".github/workflows/semgrep.yml"
+    ],
+    "minimumReleaseAge": "7 days",
+    "packageRules": [
+        {
+            "automerge": true,
+            "matchPackageNames": [
+                "@types/**"
+            ],
+            "matchUpdateTypes": [
+                "minor",
+                "patch",
+                "pin",
+                "digest"
+            ]
+        },
+        {
+            "automerge": true,
+            "extends": [
+                "packages:linters"
+            ],
+            "matchUpdateTypes": [
+                "minor",
+                "patch",
+                "pin",
+                "digest"
+            ]
+        },
+        {
+            "automerge": true,
+            "extends": [
+                "packages:test"
+            ],
+            "matchUpdateTypes": [
+                "minor",
+                "patch",
+                "pin",
+                "digest"
+            ]
+        }
+    ],
+    "prConcurrentLimit": 10,
+    "reviewersFromCodeOwners": true
 }
