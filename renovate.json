@@ -1,5 +1,6 @@
 {
     "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "customManagers": [],
     "description": "This file is managed by Terraform. Manual changes will be overwritten. To update this file, look for the `renovate_config` module being used in the `repositories` directory in our Terraform repo.",
     "extends": [
         "config:best-practices",
