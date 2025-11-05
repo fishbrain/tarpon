@@ -6,6 +6,7 @@
         ":rebaseStalePrs",
         ":automergePatch"
     ],
+    "hostRules": [],
     "ignorePaths": [
         "node_modules/**",
         ".github/workflows/semgrep.yml"
