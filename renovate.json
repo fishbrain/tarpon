@@ -13,6 +13,7 @@
         ".github/workflows/semgrep.yml"
     ],
     "minimumReleaseAge": "7 days",
+    "npmrc": null,
     "packageRules": [
         {
             "automerge": true,
@@ -51,6 +52,7 @@
             ]
         }
     ],
+    "postUpdateOptions": null,
     "prConcurrentLimit": 10,
     "reviewersFromCodeOwners": true
 }
