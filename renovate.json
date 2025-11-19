@@ -5,6 +5,7 @@
     "extends": [
         "config:best-practices",
         ":rebaseStalePrs",
+        "helpers:pinGitHubActionDigestsToSemver",
         ":automergePatch"
     ],
     "hostRules": [],
