@@ -13,6 +13,7 @@
         "node_modules/**",
         ".github/workflows/semgrep.yml"
     ],
+    "internalChecksFilter": "strict",
     "minimumReleaseAge": "7 days",
     "packageRules": [
         {
@@ -53,5 +54,9 @@
         }
     ],
     "prConcurrentLimit": 10,
-    "reviewersFromCodeOwners": true
+    "prCreation": "not-pending",
+    "reviewersFromCodeOwners": true,
+    "schedule": [
+        "* * * * 1-5"
+    ]
 }
