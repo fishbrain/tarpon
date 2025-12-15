@@ -54,7 +54,6 @@
         }
     ],
     "prConcurrentLimit": 10,
-    "prCreation": "not-pending",
     "reviewersFromCodeOwners": true,
     "schedule": [
         "* * * * 1-5"
