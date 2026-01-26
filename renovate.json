@@ -24,6 +24,7 @@
     "packageRules": [
         {
             "automerge": true,
+            "labels": [],
             "matchPackageNames": [
                 "@types/**"
             ],
@@ -39,6 +40,7 @@
             "extends": [
                 "packages:linters"
             ],
+            "labels": [],
             "matchUpdateTypes": [
                 "minor",
                 "patch",
@@ -51,6 +53,7 @@
             "extends": [
                 "packages:test"
             ],
+            "labels": [],
             "matchUpdateTypes": [
                 "minor",
                 "patch",
