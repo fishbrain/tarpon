@@ -28,8 +28,7 @@
     ],
     "hostRules": [],
     "ignorePaths": [
-        "node_modules/**",
-        ".github/workflows/semgrep.yml"
+        "node_modules/**"
     ],
     "internalChecksFilter": "strict",
     "minimumReleaseAge": "7 days",
