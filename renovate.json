@@ -40,6 +40,14 @@
             "pinDigests": false
         },
         {
+            "matchPackageNames": [
+                "fishbrain/shared-workflows",
+                "@fishbrain/eslint-config-base",
+                "@fishbrain/eslint-config-react"
+            ],
+            "minimumReleaseAge": "0 days"
+        },
+        {
             "automerge": true,
             "labels": [],
             "matchPackageNames": [
